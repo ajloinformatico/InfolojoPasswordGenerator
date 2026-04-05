@@ -1,17 +1,10 @@
-import constants as c
 import sys
 import PasswordGenerator as pg
-from Logger import LoggerType, custom_print
-from utils import check_bool_str
+from Logger import LoggerType, custom_input, custom_print
+import constants as c
+from utils import check_bool_str, check_int_str
 
 def run():
-    if len(sys.argv) > 1:    
-        launch_quick_mode()
-    else:
-        launch_cli_mode()
-        
-
-def launch_quick_mode():
     if sys.argv[1].lower() == c.QUICK_COMMAND:
         # Set default values for quick mode
         length = pg.DEFAULT_LENGTH
@@ -24,6 +17,7 @@ def launch_quick_mode():
             for arg in sys.argv[2:]:
                 user_entry = arg.lower()
                 if user_entry.startswith(c.LENGTH_COMMAND):
+                    # TODO USE check_int_str instead of try excexpt
                     try:
                         length = int(user_entry[len(c.LENGTH_COMMAND):])
                     except ValueError:
@@ -65,11 +59,5 @@ def launch_quick_mode():
     else:
         custom_print(c.QUICK_ERROR_MESSAGE, LoggerType.ERROR)
 
-
-def launch_cli_mode():
-    print(c.ASCII_ART)
-
 if __name__ == "__main__":
     run()
-
-
