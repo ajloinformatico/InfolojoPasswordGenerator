@@ -8,7 +8,7 @@ from utils import check_bool_str, check_int_str
 
 def run():
     if len(sys.argv) > 1:    
-        quick_launch.run()
+        quick_launch.run(force=False)
     else:
         cli_launch.run()
 

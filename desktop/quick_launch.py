@@ -4,8 +4,19 @@ from Logger import LoggerType, custom_input, custom_print
 import constants as c
 from utils import check_bool_str, check_int_str
 
-def run():
-    if sys.argv[1].lower() == c.QUICK_COMMAND:
+def check_quick_command_or_force(force: bool) -> bool:
+    """
+    skip quick command if this script file is launched from quick_launch.py
+    return True when force is True or check first arg to load script from main.py if main.py -q is launched
+    """
+    if force:
+        return True
+    else:
+        return sys.argv[1].lower() == c.QUICK_COMMAND
+
+
+def run(force: bool):
+    if check_quick_command_or_force(force):
         # Set default values for quick mode
         length = pg.DEFAULT_LENGTH
         include_uppercase = pg.DEFAULT_INCLUDE_UPPERCASE
@@ -60,4 +71,4 @@ def run():
         custom_print(c.QUICK_ERROR_MESSAGE, LoggerType.ERROR)
 
 if __name__ == "__main__":
-    run()
+    run(force=True)
