@@ -13,8 +13,7 @@ ASCII_ART = r"""
     ╚═══════════════════╝      
 """
 
-QUICK_ERROR_MESSAGE = r"""
-Invalid command. Use -q for quick password generation or launch without arguments for CLI App.
+QUICK_ERROR_MESSAGE = r"""Invalid command. Use -q for quick password generation or launch without arguments for CLI App.
 
 For example:
 python main.py -q will generate a password with default settings (12 characters, including uppercase letters, numbers, and special characters).
@@ -40,3 +39,4 @@ LENGTH_COMMAND = "-l="
 UPPERCASE_COMMAND = "-u="
 NUMBERS_COMMAND = "-n="
 SYMBOLS_CHAR = "-s="
+DEBUG_MODE = False

@@ -7,3 +7,9 @@ def check_bool_str(value: str) -> bool:
         return False
     else:
         return None
+
+def check_int_str(value: str) -> int:
+    try:
+        return int(value)
+    except ValueError:
+        return None
