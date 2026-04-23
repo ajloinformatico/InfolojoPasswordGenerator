@@ -16,6 +16,15 @@ def check_quick_command_or_force(force: bool) -> bool:
 
 
 def run(force: bool):
+    """
+    Quick launch mode entry point. It checks for the quick command or force flag, and if valid, it generates a password based on the provided arguments or defaults.
+    Default arguments:
+        - length: 12
+        - include_uppercase: True
+        - include_digits: True
+        - include_special_chars: True   
+    """
+
     if check_quick_command_or_force(force):
         # Set default values for quick mode
         length = pg.DEFAULT_LENGTH
@@ -27,13 +36,16 @@ def run(force: bool):
         if len(sys.argv) > 1:
             for arg in sys.argv[2:]:
                 user_entry = arg.lower()
+                
+                # Check length to load a custom password length or load default.
                 if user_entry.startswith(c.LENGTH_COMMAND):
-                    # TODO USE check_int_str instead of try excexpt
-                    try:
-                        length = int(user_entry[len(c.LENGTH_COMMAND):])
-                    except ValueError:
+                    user_input_value = check_int_str(user_entry[len(c.LENGTH_COMMAND):])
+                    if user_input_value == None:
                         custom_print(f"Invalid length value. Using default length ({length})." , LoggerType.WARNING)
+                    else:
+                        length = user_input_value
 
+                # check bool values for uppercase, digits and special characters to load custom settings or load defaults. Use check_bool_str instead of try catch to validate the input and return None for invalid inputs.
                 elif user_entry.startswith(c.UPPERCASE_COMMAND):
                     user_input_value = check_bool_str(user_entry[len(c.UPPERCASE_COMMAND):])
                     if user_input_value == None:
@@ -41,7 +53,7 @@ def run(force: bool):
                     else:
                         include_uppercase = user_input_value
 
-                # ADD check_bool_str instead of try catch
+                # check bool values for digits and special characters to load custom settings or load defaults. Use check_bool_str instead of try catch to validate the input and return None for invalid inputs.
                 elif user_entry.startswith(c.NUMBERS_COMMAND):
                     user_input_value = check_bool_str(user_entry[len(c.NUMBERS_COMMAND):])
                     if user_input_value == None:
@@ -49,6 +61,7 @@ def run(force: bool):
                     else:
                         include_digits = user_input_value
 
+                # check bool values for special characters to load custom settings or load defaults. Use check_bool_str instead of try catch to validate the input and return None for invalid inputs.
                 elif user_entry.startswith(c.SYMBOLS_CHAR):
                     user_input_value = check_bool_str(user_entry[len(c.SYMBOLS_CHAR):])
                     if user_input_value == None:
