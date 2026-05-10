@@ -32,8 +32,8 @@ python main.py -q -l=20 -u=true -n=false -s=true ) will generate a 20-character 
 """
 
 
-ACCEPTED_TRUE_VALUES = ['true', '1', 'yes']
-UNACCEPTED_TRUE_VALUES = ['false', '0', 'no']
+ACCEPTED_TRUE_VALUES = ['true', '1', 'yes', 't']
+UNACCEPTED_TRUE_VALUES = ['false', '0', 'no', 'f']
 QUICK_COMMAND = "-q"
 LENGTH_COMMAND = "-l="
 UPPERCASE_COMMAND = "-u="
