@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import ttk, messagebox
+import os
 from core import (
     PasswordGenerator,
     DEFAULT_LENGTH,
@@ -13,8 +14,16 @@ class PasswordGeneratorApp:
     def __init__(self, root):
         self.root = root
         self.root.title("Infolojo Password Generator")
-        self.root.geometry("450x400")
-        self.root.resizable(False, False)
+        self.root.iconbitmap("img/InfolojoPasswordGeneratorIconIco.ico")
+        self.root.geometry("450x450")
+        self.root.minsize(450, 450)
+
+        self.main_frame = ttk.Frame(root, padding="10")
+        self.main_frame.pack(fill="both", expand=True)
+
+        for i in range(3):
+            self.main_frame.rowconfigure(i, weight=1)
+        self.main_frame.columnconfigure(0, weight=1)
 
         self.style_widgets()
         self.create_header()
@@ -24,13 +33,13 @@ class PasswordGeneratorApp:
 
     def style_widgets(self):
         style = ttk.Style()
-        style.configure("Header.TLabel", font=("Helvetica", 14, "bold"))
+        style.configure("Header.TLabel", font=("Helvetica", 16, "bold"))
         style.configure("Option.TLabel", font=("Helvetica", 10))
         style.configure("Result.TLabel", font=("Helvetica", 12, "bold"))
 
     def create_header(self):
-        header_frame = ttk.Frame(self.root, padding="10")
-        header_frame.pack(fill="x")
+        header_frame = ttk.Frame(self.main_frame)
+        header_frame.grid(row=0, column=0, sticky="ew", pady=(0, 10))
 
         title_label = ttk.Label(
             header_frame,
@@ -47,8 +56,8 @@ class PasswordGeneratorApp:
         subtitle_label.pack()
 
     def create_password_options(self):
-        options_frame = ttk.LabelFrame(self.root, text="Password Options", padding="10")
-        options_frame.pack(fill="x", padx=20, pady=10)
+        options_frame = ttk.LabelFrame(self.main_frame, text="Password Options", padding="10")
+        options_frame.grid(row=1, column=0, sticky="ew", padx=10, pady=10)
 
         length_frame = ttk.Frame(options_frame)
         length_frame.pack(fill="x", pady=5)
@@ -90,8 +99,8 @@ class PasswordGeneratorApp:
         special_check.pack(anchor="w", pady=2)
 
     def create_generate_button(self):
-        button_frame = ttk.Frame(self.root, padding="10")
-        button_frame.pack(fill="x")
+        button_frame = ttk.Frame(self.main_frame)
+        button_frame.grid(row=2, column=0, sticky="ew", pady=10)
 
         self.generate_button = ttk.Button(
             button_frame,
@@ -101,14 +110,14 @@ class PasswordGeneratorApp:
         self.generate_button.pack()
 
     def create_result_area(self):
-        result_frame = ttk.LabelFrame(self.root, text="Generated Password", padding="10")
-        result_frame.pack(fill="both", expand=True, padx=20, pady=10)
+        result_frame = ttk.LabelFrame(self.main_frame, text="Generated Password", padding="10")
+        result_frame.grid(row=3, column=0, sticky="ew", padx=10, pady=10)
 
         self.password_label = ttk.Label(
             result_frame,
             text="",
             font=("Helvetica", 11, "bold"),
-            wraplength=380,
+            wraplength=400,
             foreground="green"
         )
         self.password_label.pack(pady=5)
@@ -168,7 +177,7 @@ class PasswordGeneratorApp:
 
 def run():
     root = tk.Tk()
-    app = PasswordGeneratorApp(root)
+    PasswordGeneratorApp(root)
     root.mainloop()
 
 

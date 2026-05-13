@@ -28,7 +28,8 @@ git clone <repository-url>
 cd InfolojoPasswordGenerator/desktop
 ```
 
-## Usage
+#### Cli Mode Examples
+![cli.png](desktop/img/cli.png)
 
 ### CLI Mode (Interactive)
 
@@ -78,6 +79,8 @@ python main.py -q -l=16
 python main.py -q -l=20 -u=true -n=false -s=true
 ```
 
+![quick.png](desktop/img/quick.png)
+
 ### GUI Mode (Desktop)
 
 Run with the `-gui` flag to launch the graphical interface:
@@ -94,6 +97,10 @@ The GUI provides:
 - Copy to Clipboard button
 - Generate Another button
 
+#### GUI Mode Examples
+
+![img.png](desktop/img/gui.png)
+
 ### Running Directly
 
 You can also run each module directly:
@@ -104,6 +111,9 @@ python cli_launch.py
 
 # Quick mode
 python quick_launch.py
+
+# GUI mode
+python app.py
 ```
 
 ## Project Structure

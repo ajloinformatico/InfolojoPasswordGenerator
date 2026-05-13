@@ -41,3 +41,7 @@ UPPERCASE_COMMAND = "-u="
 NUMBERS_COMMAND = "-n="
 SYMBOLS_CHAR = "-s="
 DEBUG_MODE = False
+
+# region ui app constants
+
+# endregion ui app constants
