@@ -4,19 +4,21 @@ A secure and flexible password generator tool that allows you to create strong p
 
 ## Overview
 
-This project provides two ways to generate passwords:
+This project provides three ways to generate passwords:
 
 - **CLI Mode**: Interactive terminal interface that prompts you for each password option
 - **Quick Mode**: Fast password generation with command-line arguments or default settings
+- **GUI Mode**: Desktop graphical interface powered by Tkinter
 
 ## Features
 
-- Customizable password length (default: 12 characters)
+- Customizable password length (default: 12 characters, range: 4-64)
 - Toggle uppercase letters inclusion
 - Toggle numbers/digits inclusion
 - Toggle special characters inclusion
 - Input validation with sensible defaults
 - Professional terminal UI with colored output
+- Desktop GUI with copy-to-clipboard functionality
 
 ## Installation
 
@@ -76,6 +78,22 @@ python main.py -q -l=16
 python main.py -q -l=20 -u=true -n=false -s=true
 ```
 
+### GUI Mode (Desktop)
+
+Run with the `-gui` flag to launch the graphical interface:
+
+```bash
+python main.py -gui
+```
+
+The GUI provides:
+- Password length slider (4-64 characters)
+- Checkboxes for uppercase, numbers, and special characters
+- Generate Password button
+- Display area for generated password
+- Copy to Clipboard button
+- Generate Another button
+
 ### Running Directly
 
 You can also run each module directly:
@@ -94,12 +112,21 @@ python quick_launch.py
 InfolojoPasswordGenerator/
 ├── desktop/
 │   ├── main.py              # Application entry point
-│   ├── cli_launch.py        # CLI interactive mode
-│   ├── quick_launch.py      # Quick mode
-│   ├── PasswordGenerator.py # Password generation logic
-│   ├── Logger.py            # Terminal output formatting
-│   ├── constants.py         # Configuration constants
-│   └── utils.py             # Utility functions
+│   ├── core/                # Core package
+│   │   ├── __init__.py      # Package exports
+│   │   ├── constants.py     # Configuration constants
+│   │   ├── utils.py         # Utility functions
+│   │   ├── logger.py        # Terminal output formatting
+│   │   └── password_generator.py  # Password generation logic
+│   ├── cli/                 # CLI mode package
+│   │   ├── __init__.py
+│   │   └── cli_launch.py    # CLI interactive mode
+│   ├── quick/               # Quick mode package
+│   │   ├── __init__.py
+│   │   └── quick_launch.py  # Quick mode
+│   └── desktop_ui/          # GUI mode package
+│       ├── __init__.py
+│       └── app.py           # Tkinter GUI application
 └── README.md                # This file
 ```
 
@@ -111,7 +138,7 @@ InfolojoPasswordGenerator/
 
 Stay tuned for upcoming releases that will expand the Infolojo Password Generator to new platforms:
 
-### 📱 Android App (Kotlin)
+### 📱 Android App (Kotlin) - Coming Soon
 
 A native Android application built with Kotlin, bringing the power of secure password generation to your mobile devices. Features include:
 
@@ -120,16 +147,7 @@ A native Android application built with Kotlin, bringing the power of secure pas
 - Biometric authentication support
 - Quick copy to clipboard functionality
 
-### 🖥️ Desktop GUI (Tkinter)
-
-A desktop graphical user interface version powered by Python's Tkinter library. Perfect for users who prefer a visual interface over the command line:
-
-- Point-and-click password configuration
-- Real-time password strength preview
-- Save and manage multiple password profiles
-- Cross-platform compatibility
-
-Both versions will share the same core password generation logic, ensuring consistent security across all platforms.
+The Android app will share the same core password generation logic, ensuring consistent security across all platforms.
 
 ---
 

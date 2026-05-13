@@ -1,7 +1,16 @@
-import PasswordGenerator as pg
-from Logger import LoggerType, custom_input, custom_print
-import constants as c
-from utils import check_bool_str, check_int_str
+from core import (
+    PasswordGenerator,
+    LoggerType,
+    custom_input,
+    custom_print,
+    DEFAULT_LENGTH,
+    DEFAULT_INCLUDE_UPPERCASE,
+    DEFAULT_INCLUDE_DIGITS,
+    DEFAULT_INCLUDE_SPECIAL_CHARS,
+    check_bool_str,
+    check_int_str,
+    ASCII_ART
+)
 
 
 def run():
@@ -27,7 +36,7 @@ def run():
     Returns:
         None: Outputs the generated password directly to the console.
     """
-    print(c.ASCII_ART)
+    print(ASCII_ART)
     custom_print("Welcome to the Infolojo Password Generator CLI!", LoggerType.SUCCESS)
     custom_print("This tool allows you to generate secure passwords with customizable options.", LoggerType.REGULAR)
     custom_print("You can choose to include uppercase letters, numbers, and special characters, as well as specify the desired length of your password.", LoggerType.REGULAR)
@@ -35,10 +44,10 @@ def run():
     print()
 
     while True:
-        length = pg.DEFAULT_LENGTH
-        include_uppercase = pg.DEFAULT_INCLUDE_UPPERCASE
-        include_digits = pg.DEFAULT_INCLUDE_DIGITS
-        include_special_chars = pg.DEFAULT_INCLUDE_SPECIAL_CHARS
+        length = DEFAULT_LENGTH
+        include_uppercase = DEFAULT_INCLUDE_UPPERCASE
+        include_digits = DEFAULT_INCLUDE_DIGITS
+        include_special_chars = DEFAULT_INCLUDE_SPECIAL_CHARS
 
         custom_print("--- Password Configuration ---", LoggerType.REGULAR)
         custom_print("Enter the desired password length (press Enter for 12): ", LoggerType.REGULAR)
@@ -48,7 +57,7 @@ def run():
             if length_value is not None:
                 length = length_value
             else:
-                custom_print(f"Invalid input. Using default length ({pg.DEFAULT_LENGTH}).", LoggerType.WARNING)
+                custom_print(f"Invalid input. Using default length ({DEFAULT_LENGTH}).", LoggerType.WARNING)
 
         custom_print("Include uppercase letters? (true/false, press Enter for true): ", LoggerType.REGULAR)
         uppercase_input = custom_input()
@@ -84,7 +93,7 @@ def run():
             include_special_chars = True
 
         print()
-        password_generator = pg.PasswordGenerator(
+        password_generator = PasswordGenerator(
             length=length,
             include_uppercase=include_uppercase,
             include_digits=include_digits,
@@ -95,8 +104,8 @@ def run():
         print()
         custom_print("Do you want to generate another password? (yes/no): ", LoggerType.REGULAR)
         continue_input = custom_input()
-        if not check_bool_str(continue_input.lower()):
-            print("THANK YOU FOR USING THE INFOLOJO PASSWORD CLI! Goodbye!")
+        if continue_input.lower() not in ['yes', 'y']:
+            custom_print("Thank you for using the Infolojo Password Generator CLI! Goodbye!", LoggerType.SUCCESS)
             break
 
 

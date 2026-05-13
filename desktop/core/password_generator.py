@@ -6,6 +6,7 @@ DEFAULT_INCLUDE_UPPERCASE = True
 DEFAULT_INCLUDE_DIGITS = True
 DEFAULT_INCLUDE_SPECIAL_CHARS = True
 
+
 class PasswordGenerator:
     def __init__(self, length=12, include_uppercase=True, include_digits=True, include_special_chars=True):
         self.length = length
